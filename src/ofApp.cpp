@@ -4,6 +4,23 @@
 void ofApp::setup(){
 	gui.setup();
 	gui.add(someButton.setup("A button", 400, 50));
+
+	addBaseCircuit();
+}
+
+void ofApp::addBaseCircuit() {
+	std::vector<int> conns; conns.push_back(4); conns.push_back(20);
+
+	Module m("and", "a1", 3);
+	comp.addMod(m);
+	comp.compile();
+
+	comp.removeMod(m);
+	comp.compile();
+
+	m.connections[0] = 8;
+	comp.addMod(m);
+	comp.compile();
 }
 
 //--------------------------------------------------------------
@@ -13,7 +30,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	//gui.draw();
+	gui.draw();
 }
 
 //--------------------------------------------------------------

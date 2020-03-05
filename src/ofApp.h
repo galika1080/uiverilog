@@ -10,9 +10,11 @@ class ofApp : public ofBaseApp{
 		ofxPanel gui;
 		ofxButton someButton;
 		ofxTextField textfield;
+		Compiler comp;
 
 	public:
 		void setup();
+        void addBaseCircuit();
 		void update();
 		void draw();
 
