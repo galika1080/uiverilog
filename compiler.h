@@ -9,31 +9,38 @@
 #include "wire.h"
 
 class Compiler {
-	private:
-		std::vector<Module> mods;
-		std::vector<int> wires;
-		std::vector<int> inputs;
-		std::vector<int> outputs;
-
 	public:
+		std::vector<Module*> mods;
+
+		std::vector<Wire> wires;
+
+		std::vector<Wire*> inputs;
+		std::vector<Wire*> outputs;
+
+	//public:
 		std::string name;
 
-		std::vector<Module>& getMods();
+		std::vector<Module*> getMods();
 
-		void addMod(Module m);
-		void removeMod(Module & m);
+		void addMod(Module* m);
+		void removeMod(Module* m);
 
 		void compile(std::string filename);
 
-		int connect(Module & first_module, Module & second_module, int first_terminal, int second_terminal);
-		void addOutput(int wire);
-		void addInput(int wire);
+		void connect(Module* first_module, int first_terminal, Module* second_module, int second_terminal, std::string wire_name);
+		void connect(int first_ind, int first_terminal, int second_ind, int second_terminal, std::string wire_name);
 
-		void sever(int wire);
-		void removeOutput(int wire);
-		void removeInput(int wire);
+		
+		void setConnectionOffset(Module & module, int new_offset);
+
+		void addOutput(std::string wire_name);
+		void addInput(std::string wire_name);
+
+		void sever(std::string wire_name);
+		void removeOutput(std::string wire_name);
+		void removeInput(std::string wire_name);
 
 		//void sever(Module & first_module, Module & second_module, int first_terminal, int second_terminal);
 
-		std::vector<Module> getConnected(int wire);
+		std::vector<Module*> getConnected(std::string wire_name);
 };

@@ -19,7 +19,8 @@ SOURCES += \
     *.cpp
 
 HEADERS += \
-    *.h
+    *.h \
+    *.hpp
 
 FORMS += \
     workspace.ui

@@ -3,23 +3,23 @@
 #include <string>
 #include <iostream>
 #include "wire.h"
+#include "connection.hpp"
 
 class Module {
 	public:
-		std::string name; // the user-defined name of the module, only for reference purpose
-		std::string id; // the actual name of the module, according to verilog
+		std::string name;		// the user-defined name of the module, only for reference purpose
+		std::string id;			// the actual name of the module, according to verilog
 
-		int max_connections; // there are a finite number of terminals
+		int max_connections;	// there are a finite number of terminals
 
-		std::vector<Wire&> connections; // each wire in the circuit has an integer identifier
-		std::vector<int> conn_widths; // the bus width of each connection
-		std::vector<int> conn_offsets; // specify where to start the range of bits of the connecting bus used
-		
-		std::vector<int> conn_positions; // each terminal needs a place to be drawn
-		int symbol; // the image to draw
-		int position; // where to draw the module
+		std::vector<Connection> connections;	// list of connections. SIZE IS CONSTANT.
 
-		Module(std::string _id, std::string _name, int _max_connections);
+		std::string symbol;				// the image to draw
+		std::pair<int, int> position;	// where to draw the module
+
+		//Module(std::string _id, std::string _name, int _max_connections, std::vector<int> buswidths, std::vector<std::pair<int, int>> positions);
+        Module(std::string _id, std::string _name, int _max_connections, std::vector<std::pair<int, int>> positions);
+		//Module(std::string file, std::string identifier);
 
 		bool operator==(const Module& other);
 		void operator<<(std::ostream & os);
