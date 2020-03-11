@@ -16,10 +16,9 @@ class Module {
 
 		std::string symbol;				// the image to draw
 		std::pair<int, int> position;	// where to draw the module
-
-		//Module(std::string _id, std::string _name, int _max_connections, std::vector<int> buswidths, std::vector<std::pair<int, int>> positions);
+		Module(std::string _id, std::string _name, int _max_connections, std::vector<int> buswidths, std::vector<std::pair<int, int>> positions);
         Module(std::string _id, std::string _name, int _max_connections, std::vector<std::pair<int, int>> positions);
-		//Module(std::string file, std::string identifier);
+		Module() {};
 
 		bool operator==(const Module& other);
 		void operator<<(std::ostream & os);

@@ -12,7 +12,7 @@ class Compiler {
 	public:
 		std::vector<Module*> mods;
 
-		std::vector<Wire> wires;
+		std::vector<Wire*> wires;
 
 		std::vector<Wire*> inputs;
 		std::vector<Wire*> outputs;

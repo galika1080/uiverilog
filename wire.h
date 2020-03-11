@@ -24,3 +24,12 @@ struct Wire {
 		o << id << ", width " << width << ", address " << this;
 	}
 };
+
+struct CompareWirePointers {
+	Wire* compare;
+
+	CompareWirePointers(Wire* comp):compare(comp) {}
+	bool operator()(Wire* data) {
+		return compare->id == data->id;
+	}
+};
