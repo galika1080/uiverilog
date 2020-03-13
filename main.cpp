@@ -2,6 +2,7 @@
 #include "compiler.h"
 #include "module.h"
 #include "FileUtils.hpp"
+#include "msbutton.h"
 
 #include <QApplication>
 #include <QDebug>
@@ -15,43 +16,27 @@ int main(int argc, char *argv[]) {
     Workspace w;
     w.show();
 
+    QHBoxLayout* module_selector_layout = w.findChild<QHBoxLayout*>();
+    std::vector<Module*> defined_modules = FileUtils::ModulesFromFile("C:\\Users\\epics\\Documents\\GitHub\\uiverilog\\moduleoutput.uiv");
+
+    for (auto & m : defined_modules) {
+        QIcon icon(QString::fromStdString(m->symbol));
+        MSButton* to_add = new MSButton(icon, "", m);
+        to_add->setIconSize(QSize(100, 100));
+        to_add->setFixedSize(QSize(100, 100));
+        to_add->show();
+        module_selector_layout->addWidget(to_add);
+
+		QObject::connect(to_add, SIGNAL (clicked_mod(Module*)), &w, SLOT (makeModule(Module*)));
+    }
+
     Compiler c{};
 
-    qDebug() << w.children();
-
-    QScrollArea* module_selector = w.findChild<QScrollArea*>();
-    QHBoxLayout* module_selector_layout = w.findChild<QHBoxLayout*>();
-
-    QIcon icon(":/resources/icon_and.png");
-    QPushButton* to_add = new QPushButton(icon, "");
-    to_add->setIconSize(QSize(100, 100));
-    to_add->setFixedSize(QSize(100, 100));
-    to_add->show();
-
-    QIcon icon2(":/resources/icon_or.png");
-    QPushButton* to_add2 = new QPushButton(icon2, "");
-    to_add2->setIconSize(QSize(100, 100));
-    to_add2->setFixedSize(QSize(100, 100));
-    to_add2->show();
-
-    module_selector_layout->addWidget(to_add);
-    module_selector_layout->addWidget(to_add2);
-
-    std::vector<std::pair<int,int>> positions;
-
-    positions.push_back(std::pair<int,int>(100, 25));
-    positions.push_back(std::pair<int,int>(100, 75));
-    positions.push_back(std::pair<int,int>(100, 75));
-    Module m1("and", "screw your stupid IDE", 3, positions);
-    m1.symbol = ":resources/icon_and.png";
-
-    //FileUtils::ModuleToFile(m1, "C:\\Users\\epics\\Documents\\GitHub\\uiverilog\\moduleoutput.uiv");
-
-    std::vector<Module*> heck_yeah = FileUtils::ModulesFromFile("C:\\Users\\epics\\Documents\\GitHub\\uiverilog\\moduleoutput.uiv");
-
-    int i = 0;
-    i = 2 * 4;
     return a.exec();
+}
+
+void makeModule(Module* m) {
+
 }
 
 void exampleStuff(Compiler & c) {

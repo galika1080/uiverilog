@@ -1,7 +1,9 @@
-#ifndef WORKSPACE_H
-#define WORKSPACE_H
+#pragma once
 
 #include <QMainWindow>
+#include <QDebug>
+
+#include "module.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Workspace; }
@@ -17,5 +19,7 @@ public:
 
 private:
     Ui::Workspace *ui;
+
+public slots:
+	void makeModule(Module* m);
 };
-#endif // WORKSPACE_H

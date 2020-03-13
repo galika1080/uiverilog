@@ -8,3 +8,7 @@ Workspace::Workspace(QWidget *parent) : QMainWindow(parent) , ui(new Ui::Workspa
 Workspace::~Workspace() {
     delete ui;
 }
+
+void Workspace::makeModule(Module* m) {
+    qDebug() << QString::fromStdString(m->id);
+}
